@@ -1,4 +1,4 @@
-import Card from "@/components/admin/ui/Card/Card";
+import Card from "@/components/ui/Card/Card";
 
 interface Props {
     title: string;
