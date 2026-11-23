@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, Calendar, Building2, Users, Settings } from "lucide-react";
+import { LayoutDashboard, Calendar, Building2, Users, Settings, UsersRound } from "lucide-react";
 
 const menu = [
     {
@@ -18,6 +18,11 @@ const menu = [
         title: "Businesses",
         href: "/admin/moderation/businesses",
         icon: Building2,
+    },
+    {
+        title: "Communities",
+        href: "/admin/moderation/communities",
+        icon: UsersRound,
     },
     {
         title: "Users",
