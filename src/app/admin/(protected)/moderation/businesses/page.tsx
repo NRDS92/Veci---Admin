@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { AdminBusiness } from "../../../../../features/admin/business/types/business";
@@ -46,11 +46,7 @@ export default function BusinessesPage() {
     const [rejectOpen, setRejectOpen] =
         useState(false);
 
-    useEffect(() => {
-        loadBusinesses();
-    }, []);
-
-    const loadBusinesses = async () => {
+    const loadBusinesses = useCallback(async () => {
 
         try {
 
@@ -73,7 +69,15 @@ export default function BusinessesPage() {
 
         }
 
-    };
+    }, []);
+
+    useEffect(() => {
+        const loadBusinessesId = window.setTimeout(() => {
+            void loadBusinesses();
+        }, 0);
+
+        return () => window.clearTimeout(loadBusinessesId);
+    }, [loadBusinesses]);
 
     const handleApprove = async () => {
 

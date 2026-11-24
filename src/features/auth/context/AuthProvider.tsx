@@ -66,7 +66,17 @@ export function AuthProvider({
 
     useEffect(() => {
 
-        refreshSession();
+        let active = true;
+        const refreshSessionId = window.setTimeout(() => {
+            if (active) {
+                void refreshSession();
+            }
+        }, 0);
+
+        return () => {
+            active = false;
+            window.clearTimeout(refreshSessionId);
+        };
 
     }, [refreshSession]);
 

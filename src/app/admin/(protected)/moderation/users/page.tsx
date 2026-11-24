@@ -22,12 +22,12 @@ export default function UsersPage() {
                 </div>
 
                 <h2 className="text-xl font-semibold text-gray-900">
-                    We're working on this
+                    We&apos;re working on this
                 </h2>
 
                 <p className="mt-2 max-w-md text-sm leading-6 text-gray-500">
                     The user management section is currently
-                    under development. Soon you'll be able to
+                    under development. Soon you&apos;ll be able to
                     view and manage registered community members.
                 </p>
 
