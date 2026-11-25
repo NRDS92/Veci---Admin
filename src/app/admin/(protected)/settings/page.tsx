@@ -22,12 +22,12 @@ export default function SettingsPage() {
                 </div>
 
                 <h2 className="text-xl font-semibold text-gray-900">
-                    We're working on this
+                    We&apos;re working on this
                 </h2>
 
                 <p className="mt-2 max-w-md text-sm leading-6 text-gray-500">
                     The settings section is currently under
-                    development. You'll be able to manage your
+                    development. You&apos;ll be able to manage your
                     administration preferences here soon.
                 </p>
 

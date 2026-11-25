@@ -40,11 +40,16 @@ export const useDashboard = () => {
     }, []);
 
     useEffect(() => {
-        void loadDashboard();
+        const initialLoadId = window.setTimeout(() => {
+            void loadDashboard();
+        }, 0);
         const intervalId = window.setInterval(() => {
-                void loadDashboard();
-            }, 150_000);
-        return () => window.clearInterval(intervalId);
+            void loadDashboard();
+        }, 150_000);
+        return () => {
+            window.clearTimeout(initialLoadId);
+            window.clearInterval(intervalId);
+        };
     }, [loadDashboard]);
 
     return {
