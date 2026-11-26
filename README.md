@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Veci Admin
 
-## Getting Started
+Veci Admin is the internal web client for moderation and administration of the Veci platform. It is maintained separately from the [Backend/Mobile monorepo](https://github.com/NRDS92/VECI---Latin-Community-Hub-) and [public Landing](https://github.com/NRDS92/Veci-web-app).
 
-First, run the development server:
+## Implemented areas
 
-```bash
+- Admin login and authenticated session lookup.
+- Protected dashboard with aggregate analytics.
+- Event moderation: list/pending views and approve/reject actions.
+- Business moderation: list/pending views and approve/reject actions.
+- Community moderation: list and approve/reject/suspend/block/restore actions; report and content moderation calls.
+- User management: list/detail, role changes and deletion.
+- Shared layout/sidebar, status components, loading/empty states and confirmation/dialog UI.
+
+Pages live in src/app/admin. The protected route group is wrapped with AuthProvider, AuthGuard and AdminLayout. The client stores the auth token in browser localStorage and Axios adds it as a Bearer token. Backend remains the authority for admin authorization.
+
+## API and data handling
+
+The Axios client in src/lib/api.ts uses NEXT_PUBLIC_API_URL and attaches the stored token. Domain API modules are under src/features/admin. Community moderation parses Community values with OwnerCommunitySchema from @ndrs92/contracts; Event and Business clients currently use local Admin types.
+
+## Technology
+
+Manifest declarations: Node.js 26.x, Next.js 16.3.0, React/React DOM 19.2.8, TypeScript ^5, ESLint ^9, Tailwind CSS ^4, Axios ^1.19.0, and @ndrs92/contracts 0.5.0. Landing and Backend currently declare Contracts 0.6.0; this version difference is a compatibility consideration. Do not upgrade dependencies as part of a documentation-only change.
+
+## Development and checks
+
+~~~sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+npx next typegen
+npx tsc --noEmit
+npm run lint
+npm run build -- --webpack
+~~~
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The package manifest has no test script or dedicated test suite. CI runs type generation, TypeScript, full ESLint and a Webpack production build. See [Development](docs/DEVELOPMENT.md).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment boundary
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The repository has a GitHub Actions CI workflow. CI is not a deployment. Provider settings, deployed commit and production promotion policy are not established by this repository alone. See [Release](docs/RELEASE.md).
 
-## Learn More
+## Documentation
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [API integration](docs/API.md)
+- [Development](docs/DEVELOPMENT.md)
+- [Release](docs/RELEASE.md)
